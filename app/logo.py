@@ -1,18 +1,7 @@
-from dataclasses import dataclass
-from pyautogui import size
-from usuarios import AuthService, ErroAutenticacao
-from PySide6.QtCore import Signal, Qt , QRectF
 from PySide6.QtGui import QPixmap, QPainter, QPainterPath
-from PySide6.QtWidgets import (
-    QWidget,
-    QLabel,
-    QLineEdit,
-    QPushButton,
-    QVBoxLayout,
-    QHBoxLayout,
-    QMessageBox,
-)
-tamanho = 300
+from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout
+from PySide6.QtCore import Qt
+import os
 
 class PainelImagem(QWidget):
     def __init__(self):
@@ -22,7 +11,16 @@ class PainelImagem(QWidget):
 
         self.logo_label = QLabel()
 
-        pixmap = QPixmap("app/logo_gato.jpeg")
+        # Build path relative to this file's directory
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        # Go up one level to app/, then into imagem tela_login (note: space and singular)
+        img_path = os.path.join(base_dir, '..', 'imagem tela_login', 'logo_gato.jpeg')
+        pixmap = QPixmap(img_path)
+
+        if pixmap.isNull():
+            # Create a fallback colored pixmap
+            pixmap = QPixmap(200, 200)
+            pixmap.fill(Qt.GlobalColor.darkBlue)
 
         tamanho = 200
 
