@@ -22,7 +22,7 @@ class PainelImagem(QWidget):
 
         self.logo_label = QLabel()
 
-        pixmap = QPixmap("app/logo_gato.jpeg")
+        pixmap = QPixmap("logo_gato.jpeg")
 
         tamanho = 200
 
